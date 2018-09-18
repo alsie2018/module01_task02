@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+Project: FileComparer
+Author:  Boris Dominguez
+--------------------------------------------------------------------------------
+
+Este es un pequeño proyecto que tiene como finalidad ayudar a las personas a comparar dos archivos:
+- Por tamaño.
+- Por contenido.
+
+Por ahora se tienen 2 formatos soportados (.txt y .csv), sin embargo se desea que en el futuro proximo soporte varios formatos como ser .srt, .pdf, .xlsx, .json, .xml, etc.
+
+--------------------------------------------------------------------------------
+
+Sinceramente, fue complicado programar un proyecto con malas practicas y pensar al mismo tiempo como poder aplicar los valores, principios y patrones para crear un software mantenible.
+
+Empecemos con la explicacion:
+Valores:
+	Comunicacion. El codigo cuenta con varios prints para leer y entender que esta ocurriendo, sin embargo lo deseable seria agregar una descripcion a cada atributo y metodo. Incluso dentro del metodo principal no hay una explicacion de porque se utiliza un Thread.Sleep(2000);
+	
+	Simplicidad. El codigo es simple de entender, sin embargo se complica en la creacion de los XFiles, sobre todo cuando se tiene que recuperar el tamaño de cada archivo.
+	
+	Flexibilidad. A primera vista parece facil agregar una nueva extension, simplemente heredando de XFile.cs, sin embargo debemos sobrecargar el metodo Comparer para soportar el nuevo tipo de comparacion.
+	
+	
+Principios:
+	Local Consequences. Si el origen de datos (path) cambiara en algun momento, tendriamos que cambiar en todos los metodos que usan un path para recuperar informacion de un archivo. Por ese lado el codigo se encuentra bastante acoplado, por lo cual los futuros desarrolladores tendran que dedicar una buena parte de su tiempo en entender el todo antes de escribir codigo nuevo.
+
+	Minimize Repetition. En la clase Comparer.cs tenemos varios pedazos de codigo que se repiten para generar el archivo con la comparacion de los archivos. Al igual que el input path, si cambiamos el output directory para nuestros resultados tendremos que cambiar ese pedazo de codigo en todos los metodos que escriban sobre el output directory.
+
+	Logic and Data Together. Este principio tambien fue roto, debido a que la logica de creacion de los XFiles y la asignacion del Size esta separada, esto puede verse en Program.cs cuando se comparan los archivos por contenido el valor del size es igual a cero.
+
+	Symmetry. Dado que realizamos operaciones de lectura y escritura, es normal pensar que estos metodos son simetricos y deberian moverse a una clase Util o Helper.
+
+	Declarative Expression. Tal como mencione, de acuerdo al lenguage de desarrollo algunas veces tendremos la opcion de programar con un estilo imperativo o con uno declarativo. Dado que usamos C# basico esto no es posible, tendriamos que usar F# para darle un estilo declarativo.
+	
+	Rate of Change. De acuerdo a este principio debemos poner la logica o los datos que cambian al mismo ritmo juntos y separar la logica o datos que cambian a diferentes velocidades. En nuestro ejemplo podriamos separar la logica de comparacion de una manera elegante utilizando el Comparable Pattern, de esa manera la comparacion se haria de diferentes maneras de acuerdo al tipo de XFile. Por ejemplo, puede que a primera vista el contenido de estos .csv sean distintos:
+
+	FileA.csv
+	Id,FirstName,LastName,Grade
+	1,Bruno,Diaz,100
+	2,Homero,Simpson,30
+	3,Pericles,Adams,40
+	4,Peter,Parker,80
+	
+	FileB.csv
+	Id,FirstName,LastName,Grade
+	1,Bruno,Diaz,100
+	4,Peter,Parker,80
+	2,Homero,Simpson,30
+	3,Pericles,Adams,40
+	
+	Pero si realizamos una comparacion mas profunda nos daremos cuenta que ambos son iguales en contenido, solo cambian el orden.
+	
