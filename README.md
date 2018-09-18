@@ -34,7 +34,7 @@ Ahora la pregunta que todos se haran es... como creamos un diseño que permita c
 Nuestro amigo Kent Beck nos da algunas pautas para poder construir un diseño mantenible, debemos enfocarnos en los Valores (proporcionan motivacion), Principios (ayudan a traducir el motivo en accion) y Patrones (describen que hacer). Para mas detalles vease la seccion inferior.
 
 
-## Valores, Principios y Patrones.
+## Valores.
 
 Existen tres valores que debemos tomar en cuenta para construir software mantenible:
 
@@ -48,6 +48,7 @@ Desde la universidad entendemos que lo deseable es tener una aplicacion con alta
 Los programas deben ser flexibles, pero solo en la forma en que cambian. Debemos ser cuidadosos al elegir patrones que fomenten la flexibilidad y traigan beneficios inmediatos, ya que podemos incrementar la complejidad en algunos casos.
 
 
+## Principios.
 
 Los principios pueden proporcionar una explicacion para la motivacion detras de un patron. Las opciones sobre patrones contradictorios a menudo se discuten mejor en terminos de principios en lugar de los detalles de los patrones involucrados. Incluso, los principios nos proporcionan una guia cuando nos encontramos frente a situaciones nuevas. Tenemos la siguiente lista de principios:
 
