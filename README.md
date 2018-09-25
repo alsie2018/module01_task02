@@ -1,6 +1,6 @@
-# Que es 'Diseño de Software'?
+# Que es 'DiseÃ±o de Software'?
 
-El 'Diseño de Software' es el proceso mediante el cual obtenemos un 'Plan de Desarrollo de Software'.
+El 'DiseÃ±o de Software' es el proceso mediante el cual obtenemos un 'Plan de Desarrollo de Software'.
 
 ## Que debe tener un Plan de Desarrollo de Software?
 
@@ -16,7 +16,7 @@ Despues de tener una lista inicial de requerimientos, lo importante es ir conoci
 
 ### Establecer la Metodologia de Desarrollo.
 
-Puede que algunos crean que la mejor opcion es aplicar SCRUM a cualquier proyecto de Software, sin embargo esto depende del tamaño del proyecto y la formalidad con la que quiera ser tratado por el cliente.
+Puede que algunos crean que la mejor opcion es aplicar SCRUM a cualquier proyecto de Software, sin embargo esto depende del tamaÃ±o del proyecto y la formalidad con la que quiera ser tratado por el cliente.
 
 ### Establecer los Estandares de Desarrollo de Software.
 
@@ -24,14 +24,14 @@ Debemos definir un estilo de programacion basado en valores, principios y practi
 
 ### Definir la Arquitectura del Software.
 
-Una vez que nuestro objetivo es claro, tenemos que fijarnos ciertas metas para el diseño: Debe permitirnos escribir software que sea lo mas util posible. Debe continuar siendo lo mas util posible. El diseno debe ser creado de manera que sea mantenible por sus desarrolladores, de manera que cumpla la primer y segunda meta. Cuando el software es dificil de mantener, es dificil hacer que continue ayudando a personas y por lo tanto la vida del producto llega a su fin. Esto no significa que su diseño haya sido del todo malo, simplemente hay consecuencias imprevisibles. 
+Una vez que nuestro objetivo es claro, tenemos que fijarnos ciertas metas para el diseÃ±o: Debe permitirnos escribir software que sea lo mas util posible. Debe continuar siendo lo mas util posible. El diseno debe ser creado de manera que sea mantenible por sus desarrolladores, de manera que cumpla la primer y segunda meta. Cuando el software es dificil de mantener, es dificil hacer que continue ayudando a personas y por lo tanto la vida del producto llega a su fin. Esto no significa que su diseÃ±o haya sido del todo malo, simplemente hay consecuencias imprevisibles. 
 
 ```
-Nosotros no podemos predecir el futuro pero podemos crear un diseño que permita cambios en el futuro.
+Nosotros no podemos predecir el futuro pero podemos crear un diseÃ±o que permita cambios en el futuro.
 ```
 
-Ahora la pregunta que todos se haran es... como creamos un diseño que permita cambios en el futuro?
-Nuestro amigo Kent Beck nos da algunas pautas para poder construir un diseño mantenible, debemos enfocarnos en los Valores (proporcionan motivacion), Principios (ayudan a traducir el motivo en accion) y Patrones (describen que hacer). Para mas detalles vease la seccion inferior.
+Ahora la pregunta que todos se haran es... como creamos un diseÃ±o que permita cambios en el futuro?
+Nuestro amigo Kent Beck nos da algunas pautas para poder construir un diseÃ±o mantenible, debemos enfocarnos en los Valores (proporcionan motivacion), Principios (ayudan a traducir el motivo en accion) y Patrones (describen que hacer). Para mas detalles vease la seccion inferior.
 
 
 ## Valores.
@@ -53,10 +53,12 @@ Los programas deben ser flexibles, pero solo en la forma en que cambian. Debemos
 Los principios pueden proporcionar una explicacion para la motivacion detras de un patron. Las opciones sobre patrones contradictorios a menudo se discuten mejor en terminos de principios en lugar de los detalles de los patrones involucrados. Incluso, los principios nos proporcionan una guia cuando nos encontramos frente a situaciones nuevas. Tenemos la siguiente lista de principios:
 
 ### Local Consequences.
-Debemos estructurar el codigo de manera que los cambios tengan consecuencias locales. Si un cambio aqui puede causar un problema alla, entonces el costo del cambio aumenta drasticamente. Los modulos con bajo acoplamiento se pueden entender mas facilmente sin tener que armar todos los pedazos y tener una comprension del todo. Esto tambien va de la mano con el primer valor (comunicacion), dado que los nuevos desarrolladores podran dedicar mas tiempo en escribir nuevo codigo en lugar de estar leyendo y comprendiendo una montaña de codigo.
+
+Debemos estructurar el codigo de manera que los cambios tengan consecuencias locales. Si un cambio aqui puede causar un problema alla, entonces el costo del cambio aumenta drasticamente. Los modulos con bajo acoplamiento se pueden entender mas facilmente sin tener que armar todos los pedazos y tener una comprension del todo. Esto tambien va de la mano con el primer valor (comunicacion), dado que los nuevos desarrolladores podran dedicar mas tiempo en escribir nuevo codigo en lugar de estar leyendo y comprendiendo una montaÃ±a de codigo.
 
 ### Minimize Repetition.
-Duplicar codigo no es del todo malo, sin embargo incrementa los costos de cambio. Por ejemplo si tenemos el mismo pedazo de codigo en 10 lugares distintos, y el dia de mañana tenemos que cambiar esa logica, tendremos que cambiar en los 10 lugares. Ahora bien, si olvidamos cambiar uno solo de ellos ya habremos dado lugar a la aparicion de uno o mas bugs.
+Duplicar codigo no es del todo malo, sin embargo incrementa los costos de cambio. Por ejemplo si tenemos el mismo pedazo de codigo en 10 lugares distintos, y el dia de maÃ±ana tenemos que cambiar esa logica, tendremos que cambiar en los 10 lugares. Ahora bien, si olvidamos cambiar uno solo de ellos ya habremos dado lugar a la aparicion de uno o mas bugs.
+
 
 ### Logic and Data Together.
 Es deseable mantener los cambios de logica y data juntos, de manera que las consecuencias de sus cambios se mantienen locales. Pueden darse casos en los que separemos la escritura en bases de datos de los objetos manejados en un determinado tiempo, en esos casos podria darse una discrepancia de datos si es que no son manejados juntos o bien si no se sincronizan de manera correcta.
@@ -68,4 +70,4 @@ Las simetrias abundan en las aplicaciones, por ejemplo si tienes un metodo add()
 De acuerdo al lenguage de desarrollo algunas veces tendremos la opcion de programar con un estilo imperativo o con uno declarativo. El estilo imperativo es poderoso, e incluso puede recibir multiples parametros, sin embargo requiere que el lector siga paso a paso el hilo de ejecucion, por otro lado el estilo declarativo hace que el codigo sea mas facil de leer.
 
 ### Rate of Change.
-De acuerdo a este principio debemos poner la logica o los datos que cambian al mismo ritmo juntos y separar la logica o datos que cambian a diferentes velocidades. Estas tasas de cambio son una forma de simetría temporal. Por ejemplo, si el calculo de una metrica cambia cada year, la logica para calcular la metrica deberia separarse de manera que solo modifiquemos los parametros de entrada.
+De acuerdo a este principio debemos poner la logica o los datos que cambian al mismo ritmo juntos y separar la logica o datos que cambian a diferentes velocidades. Estas tasas de cambio son una forma de simetrÃ­a temporal. Por ejemplo, si el calculo de una metrica cambia cada year, la logica para calcular la metrica deberia separarse de manera que solo modifiquemos los parametros de entrada.
