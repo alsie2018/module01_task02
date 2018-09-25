@@ -1,201 +1,45 @@
-﻿using System;
+﻿using CsvHelper;
+using FileComparer.client.csv;
+using FileComparer.client.txt;
+using FileComparer.comparer;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace FileComparer
 {
     class Program
     {
-        private static string INPUT_BASE_PATH = @"..\..\input\";
+        private const string INPUT_BASE_PATH = @"..\..\input\";
+        private const string OUTPUT_BASE_PATH = @"..\..\output\";
+        
+        static string GetOuputPath(string prefix)
+        {
+            DateTime currentDateTime = DateTime.Now;
+            return string.Concat(OUTPUT_BASE_PATH, prefix, Guid.NewGuid().ToString("N"), ".txt");
+        }
 
         static void Main(string[] args)
         {
-            // Compare files by size
-            CompareTextFilesBySize();
-            Thread.Sleep(2000);
+            string textPathA = string.Concat(INPUT_BASE_PATH, "GradesA.txt");
+            string textPathB = string.Concat(INPUT_BASE_PATH, "GradesB.txt");
+            string textPathAA = string.Concat(INPUT_BASE_PATH, "GradesAA.txt");
+            string textPathBB = string.Concat(INPUT_BASE_PATH, "GradesBB.txt");
+            string csvPathA = string.Concat(INPUT_BASE_PATH, "GradesA.csv");
+            string csvPathB = string.Concat(INPUT_BASE_PATH, "GradesB.csv");
+            string csvPathAA = string.Concat(INPUT_BASE_PATH, "GradesAA.csv");
+            string csvPathBB = string.Concat(INPUT_BASE_PATH, "GradesBB.csv");
+            string biblePathA = string.Concat(INPUT_BASE_PATH, "HolyBibleA.txt");
+            string biblePathB = string.Concat(INPUT_BASE_PATH, "HolyBibleB.txt");
 
-            CompareTextFilesBySize2();
-            Thread.Sleep(2000);
+            // Implementation of TextComparer
+            GenericFileComparer<TextFileContent> txtComparer = new GenericFileComparer<TextFileContent>(new TextFileContentCreator(), new TextFileComparer());
+            txtComparer.Compare(textPathAA, textPathBB, GetOuputPath("TEXT"));
+            txtComparer.Compare(biblePathA, biblePathB, GetOuputPath("BIBLE"));
 
-            CompareCsvFilesBySize();
-            Thread.Sleep(2000);
-
-            CompareCsvFilesBySize2();
-            Thread.Sleep(2000);
-            
-
-            // Compare files by content
-            CompareTextFilesByContent();
-            Thread.Sleep(2000);
-
-            CompareTextFilesByContent2();
-            Thread.Sleep(2000);
-
-            CompareCsvFilesByContent();
-            Thread.Sleep(2000);
-
-            CompareCsvFilesByContent2();
-            Thread.Sleep(2000);
-        }
-
-        static void CompareTextFilesBySize()
-        {
-            // Create the FileA and FileB
-            TextFile tfa = new TextFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesA.txt");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            TextFile tfb = new TextFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesB.txt");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Adding data to the new objects
-            FileInfo fia = new FileInfo(tfa.Path);
-            tfa.Size = fia.Length;
-
-            FileInfo fib = new FileInfo(tfb.Path);
-            tfb.Size = fib.Length;
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareBySize(tfa, tfb);
-        }
-
-        static void CompareTextFilesBySize2()
-        {
-            // Create the FileA and FileB
-            TextFile tfa = new TextFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesAA.txt");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            TextFile tfb = new TextFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesBB.txt");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Adding data to the new objects
-            FileInfo fia = new FileInfo(tfa.Path);
-            tfa.Size = fia.Length;
-
-            FileInfo fib = new FileInfo(tfb.Path);
-            tfb.Size = fib.Length;
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareBySize(tfa, tfb);
-        }
-
-        static void CompareCsvFilesBySize()
-        {
-            // Create the FileA and FileB
-            CsvFile tfa = new CsvFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesA.csv");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            CsvFile tfb = new CsvFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesB.csv");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Adding data to the new objects
-            FileInfo fia = new FileInfo(tfa.Path);
-            tfa.Size = fia.Length;
-
-            FileInfo fib = new FileInfo(tfb.Path);
-            tfb.Size = fib.Length;
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareBySize(tfa, tfb);
-        }
-
-        static void CompareCsvFilesBySize2()
-        {
-            // Create the FileA and FileB
-            CsvFile tfa = new CsvFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesAA.csv");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            CsvFile tfb = new CsvFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesBB.csv");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Adding data to the new objects
-            FileInfo fia = new FileInfo(tfa.Path);
-            tfa.Size = fia.Length;
-
-            FileInfo fib = new FileInfo(tfb.Path);
-            tfb.Size = fib.Length;
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareBySize(tfa, tfb);
-        }
-
-        static void CompareTextFilesByContent()
-        {
-            // Create the FileA and FileB
-            TextFile tfa = new TextFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesA.txt");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            TextFile tfb = new TextFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesB.txt");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareByContent(tfa, tfb);
-        }
-
-        static void CompareTextFilesByContent2()
-        {
-            // Create the FileA and FileB
-            TextFile tfa = new TextFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesAA.txt");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            TextFile tfb = new TextFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesBB.txt");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareByContent(tfa, tfb);
-        }
-
-        static void CompareCsvFilesByContent()
-        {
-            // Create the FileA and FileB
-            CsvFile tfa = new CsvFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesA.csv");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            CsvFile tfb = new CsvFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesB.csv");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-            
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareByContent(tfa, tfb);
-        }
-
-        static void CompareCsvFilesByContent2()
-        {
-            // Create the FileA and FileB
-            CsvFile tfa = new CsvFile();
-            tfa.Path = string.Concat(INPUT_BASE_PATH, "GradesAA.csv");
-            tfa.FileName = Path.GetFileName(tfa.Path);
-
-            CsvFile tfb = new CsvFile();
-            tfb.Path = string.Concat(INPUT_BASE_PATH, "GradesBB.csv");
-            tfb.FileName = Path.GetFileName(tfb.Path);
-
-            // Compare those files
-            Comparer comparer = new Comparer();
-            comparer.CompareByContent(tfa, tfb);
+            // Implementation of CsvComparer
+            GenericFileComparer<CsvFileContent<CsvStudent>> csvComparer = new GenericFileComparer<CsvFileContent<CsvStudent>>(new CsvFileContentCreator<CsvStudent>(), new CsvStudentFileComparer());
+            csvComparer.Compare(csvPathAA, csvPathBB, GetOuputPath("CSV"));
         }
     }
 }
