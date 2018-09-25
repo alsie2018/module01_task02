@@ -53,10 +53,12 @@ Los programas deben ser flexibles, pero solo en la forma en que cambian. Debemos
 Los principios pueden proporcionar una explicacion para la motivacion detras de un patron. Las opciones sobre patrones contradictorios a menudo se discuten mejor en terminos de principios en lugar de los detalles de los patrones involucrados. Incluso, los principios nos proporcionan una guia cuando nos encontramos frente a situaciones nuevas. Tenemos la siguiente lista de principios:
 
 ### Local Consequences.
+
 Debemos estructurar el codigo de manera que los cambios tengan consecuencias locales. Si un cambio aqui puede causar un problema alla, entonces el costo del cambio aumenta drasticamente. Los modulos con bajo acoplamiento se pueden entender mas facilmente sin tener que armar todos los pedazos y tener una comprension del todo. Esto tambien va de la mano con el primer valor (comunicacion), dado que los nuevos desarrolladores podran dedicar mas tiempo en escribir nuevo codigo en lugar de estar leyendo y comprendiendo una montaña de codigo.
 
 ### Minimize Repetition.
 Duplicar codigo no es del todo malo, sin embargo incrementa los costos de cambio. Por ejemplo si tenemos el mismo pedazo de codigo en 10 lugares distintos, y el dia de mañana tenemos que cambiar esa logica, tendremos que cambiar en los 10 lugares. Ahora bien, si olvidamos cambiar uno solo de ellos ya habremos dado lugar a la aparicion de uno o mas bugs.
+
 
 ### Logic and Data Together.
 Es deseable mantener los cambios de logica y data juntos, de manera que las consecuencias de sus cambios se mantienen locales. Pueden darse casos en los que separemos la escritura en bases de datos de los objetos manejados en un determinado tiempo, en esos casos podria darse una discrepancia de datos si es que no son manejados juntos o bien si no se sincronizan de manera correcta.
